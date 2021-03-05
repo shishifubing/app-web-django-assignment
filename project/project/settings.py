@@ -73,7 +73,7 @@ TEMPLATES = [
 ]
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static/startbootstrap-sb-admin-2"
+    BASE_DIR / "static/"
 ]
 
 WSGI_APPLICATION = 'project.wsgi.application'
