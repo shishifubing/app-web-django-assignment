@@ -1,6 +1,6 @@
 # D1
 
-![Alt text](./project/static/img/task.jpg?raw=true "D1.5")
+![Alt text](./src/static/img/task.png?raw=true "D1.5")
 
 double - "На одной из страниц контент повторяется 2 раза без изменения content"
 
