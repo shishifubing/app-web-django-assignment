@@ -22,4 +22,5 @@ urlpatterns = [
     # делаем так, чтобы все адреса из нашего приложения (simpleapp/urls.py)
     # сами автоматически подключались когда мы их добавим.
     path('products/', include('simpleapp.urls')),
+    path('news/', include('newspaper.urls')),
 ]
