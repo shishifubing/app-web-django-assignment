@@ -16,7 +16,7 @@ def censor(value: str) -> str:
     for word in re_findall(r'\b\S+\b', value):
         if word.lower() not in word_list:
             continue
-        regex = rf'(?!^|\S+){re_escape(word)}(?!\S+|$)'
+        regex = rf'(?=^|\S+){re_escape(word)}(?=\S+|$)'
         value = re_sub(regex, '*' * len(word), value)
 
     return value
