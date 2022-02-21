@@ -16,6 +16,7 @@ def censor(value: str):
     for word in re_findall(r'\b\S+\b', value):
         if word.lower() not in word_list:
             continue
+
         value = value.replace(word, '*' * len(word))
 
     return value
