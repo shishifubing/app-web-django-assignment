@@ -17,9 +17,9 @@ Articles
         <tbody>
             {% for article in articles %}
             <tr>
-                <td>{{ article.name }}</td>
+                <td><a href="/news/{{ article.id }}">{{ article.name }}</a></td>
                 <td>{{ article.publication_date }}</td>
-                <td>{{ article.article_text|truncatewords:20 }}</td>
+                <td>{{ article.description | truncatewords:50 }}</td>
             </tr>
             {% endfor %}
         </tbody>
