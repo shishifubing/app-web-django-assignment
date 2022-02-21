@@ -1,4 +1,6 @@
 {% extends 'default.html' %}
+{% load custom_filters %}
+
 {% block title %}
 Articles
 {% endblock title %}
@@ -17,9 +19,9 @@ Articles
         <tbody>
             {% for article in articles %}
             <tr>
-                <td><a href="/news/{{ article.id }}">{{ article.name }}</a></td>
+                <td><a href="/news/{{ article.id }}">{{ article.name | Censor }}</a></td>
                 <td>{{ article.publication_date }}</td>
-                <td>{{ article.description | truncatewords:50 }}</td>
+                <td>{{ article.description | truncatewords:50 | Censor }}</td>
             </tr>
             {% endfor %}
         </tbody>

@@ -1,9 +1,12 @@
 {% extends 'default.html' %}
+{% load custom_filters %}
+
 {% block title %}
 Article {{ article.name }}
 {% endblock title %}
+
 {% block content %}
-<h1>{{ article.name }}</h1>
+<h1>{{ article.name | Censor }}</h1>
 <h4>{{ article.publication_date }} </h2>
-<p>{{ article.description }}
+<p>{{ article.description | Censor }}
 {% endblock content %}
