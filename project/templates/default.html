@@ -33,10 +33,11 @@
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+            {% include 'flatpages/topbar.html' %}
 
-                {% include 'flatpages/topbar.html' %}
+            <!-- Main Content -->
+            <div id="content" class="px-5 py-3">
+
                 {% block content %}
                 {% endblock content %}
 

@@ -1,7 +1,9 @@
 {% extends 'default.html' %}
-{% block title %} Article {{ article.name }} {% endblock title %}
+{% block title %}
+Article {{ article.name }}
+{% endblock title %}
 {% block content %}
 <h1>{{ article.name }}</h1>
-<h2>{{ article.publication_date }} </h2>
-<p>{{ article.article_text }}
+<h4>{{ article.publication_date }} </h2>
+<p>{{ article.description }}
 {% endblock content %}

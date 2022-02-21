@@ -1,4 +1,6 @@
 {% extends 'default.html' %}
+{% load custom_filters %}
+
 {% block title %}
 Products
 {% endblock title %}
@@ -20,8 +22,8 @@ Products
         <tbody>
             {% for product in products %}
             <tr>
-                <td>{{ product.name }}</td>
-                <td>{{ product.description|truncatewords:4 }}</td>
+                <td>{{ product.name | multiply:4 }}</td>
+                <td>{{ product.description | truncatewords:4 }}</td>
                 <td>{{ product.category.name }}</td>
                 <td>{{ product.price }}</td>
                 <td>{{ product.quantity }}</td>
@@ -29,7 +31,6 @@ Products
             {% endfor %}
         </tbody>
     </table>
-    {{ products }}
 {% else %}
     <h2>no products</h2>
 {% endif %}

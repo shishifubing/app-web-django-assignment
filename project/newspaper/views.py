@@ -9,7 +9,7 @@ class ArticleList(ListView):
     model = Article
     template_name = 'articles/articles.html'
     context_object_name = 'articles'
-    queryset = Article.objects.order_by('id')
+    queryset = Article.objects.order_by('-publication_date')
 
 
 class ArticleDetail(DetailView):
