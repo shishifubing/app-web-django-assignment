@@ -1,7 +1,7 @@
 from multiprocessing.sharedctypes import Value
 from typing import Set
 from django import template
-from re import findall as re_findall
+from re import findall as re_findall, sub as re_sub, escape as re_escape
 from .__init__ import get_word_list
 
 register = template.Library()
@@ -16,7 +16,7 @@ def censor(value: str):
     for word in re_findall(r'\b\S+\b', value):
         if word.lower() not in word_list:
             continue
-
-        value = value.replace(word, '*' * len(word))
+        regex = rf'(?!^|\S+){re_escape(word)}(?!\S+|$)'
+        value = re_sub(regex, '*' * len(word), value)
 
     return value
