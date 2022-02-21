@@ -9,7 +9,7 @@ word_list: Set[str] = set(get_word_list())
 
 
 @register.filter(name='Censor')
-def censor(value: str):
+def censor(value: str) -> str:
     if not isinstance(value, str):
         value = str(value)
 
