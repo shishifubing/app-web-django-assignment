@@ -3,6 +3,10 @@
 from django.views.generic import ListView, DetailView
 from .models import Product
 from datetime import datetime as datetime_datetime
+from django.views import View
+from django.core.paginator import Paginator
+from .models import Product
+from django.shortcuts import render
 
 
 class ProductsList(ListView):
@@ -11,18 +15,28 @@ class ProductsList(ListView):
     context_object_name = 'products'
     queryset = Product.objects.order_by('-id')
 
-    # метод get_context_data нужен нам для того, чтобы мы могли передать
-    # переменные в шаблон. В возвращаемом словаре context будут храниться все
-    # переменные. Ключи этого словари и есть переменные, к которым мы сможем
-    # потом обратиться через шаблон
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # добавим переменную текущей даты time_now
         context['time_now'] = datetime_datetime.utcnow()
-        # добавим ещё одну пустую переменную, чтобы на её примере посмотреть
-        # работу другого фильтра
         context['value1'] = None
         return context
+
+
+class Products(View):
+
+    model = Product
+    template_name = 'products/products.html'
+    context_object_name = 'products'
+    queryset = Product.objects.order_by('-id')
+
+    def get(self, request):
+        products = Product.objects.order_by('-price')
+        paginator = Paginator(products, 1)
+
+        products = paginator.get_page(request.GET.get('page', 1))
+        data = {'products': products}
+
+        return render(request, 'sample_app/product_list.html', data)
 
 
 # создаём представление, в котором будут детали конкретного отдельного товара
