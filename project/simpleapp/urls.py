@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ProductsList, ProductDetail  # импортируем наше представление
+from .views import Products, ProductDetail  # импортируем наше представление
 
 
 urlpatterns = [
@@ -7,7 +7,7 @@ urlpatterns = [
     # останется пустым, позже станет ясно почему
     # т.к. сам по себе это класс, то нам надо представить этот класс в виде
     # view. Для этого вызываем метод as_view
-    path('', ProductsList.as_view()),
+    path('', Products.as_view()),
     # pk — это первичный ключ товара, который будет выводиться у нас в шаблон
     path('<int:pk>', ProductDetail.as_view()),
 
