@@ -1,34 +1,3 @@
-
-Skip to content
-Pull requests
-Issues
-Marketplace
-Explore
-@kongrentian
-snguyenthanh /
-better_profanity
-Public
-
-Code
-Issues 14
-Pull requests 4
-Actions
-Projects
-Wiki
-Security
-
-    Insights
-
-better_profanity/better_profanity/profanity_wordlist.txt
-@jcbrockschmidt
-jcbrockschmidt Remove incompatible words
-Latest commit 3b9ed34 on Jan 21, 2021
-History
-3 contributors
-@snguyenthanh
-@jcbrockschmidt
-@Andriybeats
-835 lines (835 sloc) 6.19 KB
 2 girls 1 cup
 anal
 anus
@@ -863,20 +832,4 @@ x-rated2g1c
 xx
 xxx
 yaoi
-yury
-
-    © 2022 GitHub, Inc.
-
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
-
-Loading complete
+yuri
