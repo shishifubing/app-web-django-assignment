@@ -40,9 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'simpleapp.apps.SimpleappConfig',
-    'newspaper.apps.NewspaperConfig'
+    'newspaper.apps.NewspaperConfig',
+    'django_filters',
+    'django.forms'
 ]
 
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
