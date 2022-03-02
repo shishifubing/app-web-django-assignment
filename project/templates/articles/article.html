@@ -8,5 +8,5 @@ Article {{ article.name }}
 {% block content %}
 <h1>{{ article.name | Censor }}</h1>
 <h4>{{ article.publication_date }} </h2>
-<p>{{ article.description | Censor }}
+<p>{{ article.description | Censor }}</p>
 {% endblock content %}

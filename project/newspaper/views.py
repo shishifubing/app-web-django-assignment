@@ -16,6 +16,8 @@ class ArticleList(ListView):
 
 class ArticleListSearch(ArticleList):
 
+    template_name = 'articles/articles_search.html'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = ArticleFilter(

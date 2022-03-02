@@ -5,9 +5,9 @@ from .widgets import BootstrapDatePickerInput, BootstrapTextInput
 
 class ArticleFilter(FilterSet):
 
+    # settings.py: DATETIME_INPUT_FORMATS
     publication_date = DateTimeFilter(
         lookup_expr='gte', label='',
-        # DATETIME_INPUT_FORMATS, settings.py
         widget=BootstrapDatePickerInput(format='%Y-%m-%D'))
     name = CharFilter(
         lookup_expr='icontains',
