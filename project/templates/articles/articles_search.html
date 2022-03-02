@@ -1,24 +1,31 @@
-{% extends 'default.html' %}
+{% extends 'articles/articles.html' %}
 {% load custom_filters %}
 
-{% block title %}
-Articles
-{% endblock title %}
-
 {% block content %}
-<h1>All articles ({{ articles | length }})</h1>
-{% if articles %}
-    <table class="table">
+<h1>Articles [{{ filter.qs | length }}]</h1>
+<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="" name="articles_search_form" method="get">
+    <div class="input-group">
+        {{ filter.form }}
+        <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+        </button>
+    </div>
+</form>
+
+{% if filter.qs %}
+    <table class="table m-2">
         <thead>
             <tr>
+                <th scope="col">Author</th>
                 <th scope="col">Summary</th>
                 <th scope="col">Pubilcation date</th>
                 <th scope="col">Snippet</th>
             </tr>
         </thead>
         <tbody>
-            {% for article in articles %}
+            {% for article in filter.qs %}
             <tr>
+                <td>{{ article.author_name}}</td>
                 <td><a href="/news/{{ article.id }}">{{ article.name | Censor }}</a></td>
                 <td>{{ article.publication_date }}</td>
                 <td>{{ article.description | truncatewords:50 | Censor }}</td>
