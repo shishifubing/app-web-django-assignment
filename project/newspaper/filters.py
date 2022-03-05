@@ -20,4 +20,4 @@ class ArticleFilter(FilterSet):
 
     class Meta:
         model = Article
-        fields = ['publication_date', 'name']
+        fields = ['publication_date', 'name', 'author_name']

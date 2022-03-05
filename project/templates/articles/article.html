@@ -6,7 +6,7 @@ Article {{ article.name }}
 {% endblock title %}
 
 {% block content %}
-<h1>{{ article.name | Censor }}</h1>
+<h1>{{ article.name | censor }}</h1>
 <h4>{{ article.publication_date }} </h2>
-<p>{{ article.description | Censor }}</p>
+<p>{{ article.description | censor }}</p>
 {% endblock content %}
