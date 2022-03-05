@@ -1,0 +1,23 @@
+{% extends 'articles/articles.html' %}
+{% load custom_filters %}
+{% load static %}
+
+{% block content %}
+<h1 class="my-2">
+    Articles
+    <a href="{% url 'article_create' %}" class="btn btn-success btn-circle">
+        <i class="fas fa-plus"></i>
+    </a>
+</h1>
+<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="" name="articles_search_form" method="get">
+    <div class="input-group">
+        {{ filter.form }}
+        <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+        </button>
+    </div>
+</form>
+
+{% include 'articles/articles_table.html' %}
+
+{% endblock content %}

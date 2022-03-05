@@ -6,32 +6,18 @@ Products
 {% endblock title %}
 
 {% block content %}
-<h1>All products</h1>
+<h1>Products</h1>
 <h3>{{ time_now|date:'M d Y' }}</h3>
-{% if products %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Category</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in products %}
-            <tr>
-                <td>{{ product.name | multiply:4 }}</td>
-                <td>{{ product.description | truncatewords:4 }}</td>
-                <td>{{ product.category.name }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.quantity }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <h2>no products</h2>
-{% endif %}
+<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            {{ filter.form }}
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+</form>
+{% include 'products/products_filter_table.html'%}
+
 {% endblock content %}

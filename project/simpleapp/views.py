@@ -1,25 +1,37 @@
-# from django.shortcuts import render
-# импортируем класс получения деталей объекта
-from django.views.generic import ListView, DetailView
-from .models import Product
-from datetime import datetime as datetime_datetime
-from django.views import View
 from django.core.paginator import Paginator
-from .models import Product
 from django.shortcuts import render
+from django.views import View
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
+
+from .filters import ProductFilter
+from .forms import ProductForm
+from .models import Category, Product
 
 
 class ProductsList(ListView):
     model = Product
     template_name = 'products/products.html'
     context_object_name = 'products'
-    queryset = Product.objects.order_by('-id')
+    ordering = ['-price']
+    paginate_by = 1
+    form_class = ProductForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['time_now'] = datetime_datetime.utcnow()
-        context['value1'] = None
+        context['filter'] = ProductFilter(
+            self.request.GET, queryset=self.get_queryset())
+        context['categories'] = Category.objects.all()
+        context['form'] = ProductForm()
         return context
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+        return super().get(request, *args, **kwargs)
 
 
 class Products(View):
@@ -36,11 +48,30 @@ class Products(View):
         products = paginator.get_page(request.GET.get('page', 1))
         data = {'products': products}
 
-        return render(request, 'sample_app/product_list.html', data)
+        return render(request, 'products/products.html', data)
 
 
-# создаём представление, в котором будут детали конкретного отдельного товара
 class ProductDetail(DetailView):
-    model = Product  # модель всё та же, но мы хотим получать детали конкретно отдельного товара
-    template_name = 'products/product.html'  # название шаблона будет product.html
-    context_object_name = 'product'  # название объекта
+    model = Product
+    template_name = 'products/product.html'
+    context_object_name = 'product'
+
+
+class ProductUpdateView(UpdateView):
+    template_name = 'products/product_create.html'
+    form_class = ProductForm
+
+    def get_object(self, **kwargs):
+        id = self.kwargs.get('pk')
+        return Product.objects.get(pk=id)
+
+
+class ProductCreateView(CreateView):
+    template_name = 'products/product_create.html'
+    form_class = ProductForm
+
+
+class ProductDeleteView(DeleteView):
+    template_name = 'products/product_delete.html'
+    queryset = Product.objects.all()
+    success_url = '/products/'
