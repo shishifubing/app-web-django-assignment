@@ -1,0 +1,39 @@
+{% load custom_filters %}
+
+{% if object_list %}
+<table class="table table-hover m-2">
+    <thead >
+        <tr>
+            <th scope="col">Actions</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Pubilcation date</th>
+            <th scope="col">Snippet</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in object_list %}
+        <tr>
+            <td>
+                <a href="{% url 'article_update' article.id %}" class="btn btn-primary btn-circle btn-sm">
+                    <i class="fas fa-pencil-alt"></i>
+                </a>
+                <a href="{% url 'article_delete' article.id %}" class="btn btn-danger btn-circle btn-sm">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'article_detail' article.id %}">
+                    {{ article.name | censor }}
+                </a>
+            </td>
+            <td>{{ article.author_name}}</td>
+            <td>{{ article.publication_date }}</td>
+            <td>{{ article.description | truncatechars:50 | censor }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2>No articles</h2>
+{% endif %}

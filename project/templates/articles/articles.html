@@ -1,32 +1,17 @@
 {% extends 'default.html' %}
-{% load custom_filters %}
 
 {% block title %}
 Articles
 {% endblock title %}
 
 {% block content %}
-<h1>All articles ({{ articles | length }})</h1>
-{% if articles %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Summary</th>
-                <th scope="col">Pubilcation date</th>
-                <th scope="col">Snippet</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for article in articles %}
-            <tr>
-                <td><a href="/news/{{ article.id }}">{{ article.name | Censor }}</a></td>
-                <td>{{ article.publication_date }}</td>
-                <td>{{ article.description | truncatewords:50 | Censor }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <h2>no articles</h2>
-{% endif %}
+<h1 class="my-2">
+    Articles
+    <a href="{% url 'article_create' %}" class="btn btn-success btn-circle">
+        <i class="fas fa-plus"></i>
+    </a>
+</h1>
+
+{% include 'articles/articles_table.html' %}
+
 {% endblock content %}
