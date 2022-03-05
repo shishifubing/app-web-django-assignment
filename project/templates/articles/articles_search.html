@@ -1,8 +1,14 @@
 {% extends 'articles/articles.html' %}
 {% load custom_filters %}
+{% load static %}
 
 {% block content %}
-<h1>Articles [{{ filter.qs | length }}]</h1>
+<h1 class="my-2">
+    Articles
+    <a href="{% url 'article_create' %}" class="btn btn-success btn-circle">
+        <i class="fas fa-plus"></i>
+    </a>
+</h1>
 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="" name="articles_search_form" method="get">
     <div class="input-group">
         {{ filter.form }}
@@ -12,28 +18,6 @@
     </div>
 </form>
 
-{% if filter.qs %}
-<table class="table table-hover m-2">
-    <thead >
-        <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Author</th>
-            <th scope="col">Pubilcation date</th>
-            <th scope="col">Snippet</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for article in filter.qs %}
-        <tr>
-            <td><a href="/news/{{ article.id }}">{{ article.name | Censor }}</a></td>
-            <td>{{ article.author_name}}</td>
-            <td>{{ article.publication_date }}</td>
-            <td>{{ article.description | truncatechars:50 | Censor }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<h2>No articles</h2>
-{% endif %}
+{% include 'articles/articles_table.html' %}
+
 {% endblock content %}

@@ -16,3 +16,6 @@ class Article(Model):
 
     def __str__(self):
         return f'{self.name.title()}: {self.description[:20]}'
+
+    def get_absolute_url(self):
+        return f'/news/{self.id}'
