@@ -15,6 +15,27 @@ from pathlib import Path, os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = LOGIN_URL
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_FORMS = {
+    #add_email: allauth.account.forms.AddEmailForm
+    # change_password: allauth.account.forms.#ChangePasswordForm
+    #disconnect: allauth.socialaccount.forms.DisconnectForm
+    'login': 'sign.forms.CustomLoginForm',
+    #reset_password: allauth.account.forms.ResetPasswordForm
+    #reset_password_from_key: allauth.account.forms.ResetPasswordKeyForm
+    #set_password: allauth.account.forms.SetPasswordForm
+    'signup': 'sign.forms.CustomSignupForm'
+    #signup: allauth.socialaccount.forms.SignupForm
+}
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -25,7 +46,7 @@ SECRET_KEY = 'dlmsj#fz4p=u_v^5&kp2og1pz@ekg71^(u^$d@z&&a92q2g)@2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -39,10 +60,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
+
+    'django.forms',
+    'django_filters',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
     'simpleapp.apps.SimpleappConfig',
     'newspaper.apps.NewspaperConfig',
-    'django_filters',
-    'django.forms'
+    'sign.apps.SignConfig',
+    'protect.apps.ProtectConfig'
 ]
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'

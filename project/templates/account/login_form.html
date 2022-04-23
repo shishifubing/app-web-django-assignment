@@ -1,0 +1,38 @@
+{% load i18n %}
+{% load custom_filters %}
+
+<form class="user" method="POST"
+      action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {{ form.non_field_errors | errors }}
+    <div class="form-group">
+        {{ form.login }}
+        {{ form.login.errors | errors  }}
+    </div>
+    <div class="form-group">
+        {{ form.password }}
+        {{ form.password.errors | errors }}
+    </div>
+
+    <div class="form-group">
+        <div class="custom-control custom-checkbox small">
+            {{ form.remember }}
+            <label class="custom-control-label"
+                   for="id_remember">
+                   Remember Me
+            </label>
+            {{ form.remember.errors | errors }}
+        </div>
+    </div>
+
+    <input type="submit"
+           class="btn btn-primary btn-user btn-block"
+           value="Login" />
+    <hr>
+    {% include 'socialaccount/snippets/provider_list.html' with process='login' provider_message='Login with ' %}
+    {% if redirect_field_value %}
+    <input type="hidden"
+            name="{{ redirect_field_name }}"
+            value="{{ redirect_field_value }}" />
+    {% endif %}
+</form>

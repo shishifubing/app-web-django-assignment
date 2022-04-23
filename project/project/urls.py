@@ -17,10 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('pages/', include('django.contrib.flatpages.urls')),
-    # делаем так, чтобы все адреса из нашего приложения (simpleapp/urls.py)
-    # сами автоматически подключались когда мы их добавим.
+    path('', include('protect.urls')),
+    path('sign/', include('sign.urls')),
     path('products/', include('simpleapp.urls')),
     path('news/', include('newspaper.urls')),
+
+    path('accounts/', include('allauth.urls')),
+
+    path('admin/', admin.site.urls),
+    path('pages/', include('django.contrib.flatpages.urls')),
 ]

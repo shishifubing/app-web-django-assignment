@@ -1,11 +1,21 @@
 from multiprocessing.sharedctypes import Value
-from typing import Set
+from typing import Any, List, Set
 from django import template
+from django.utils.safestring import mark_safe
 from re import findall as re_findall, sub as re_sub, escape as re_escape
-from .__init__ import get_word_list
+from .word_list import get_word_list
 
 register = template.Library()
 word_list: Set[str] = set(get_word_list())
+
+
+@register.filter(name='errors')
+@mark_safe
+def errors(errors: List[Any],
+           cls: str = 'alert alert-danger m-2',
+           tag: str = 'p') -> List[Any]:
+    return '\n'.join([f'<{tag} class="{cls}">{error}</{tag}>'
+                      for error in errors])
 
 
 @register.filter(name='censor')
