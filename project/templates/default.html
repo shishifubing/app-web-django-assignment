@@ -1,11 +1,15 @@
 {% extends 'defaults.html' %}
+{% load account %}
 
 {% block sidebar %}
 {% include 'flatpages/sidebar.html' %}
 {% endblock sidebar %}
 
 {% block topbar %}
+{% user_display user as user_display %}
+{% if user_display %}
 {% include 'flatpages/topbar.html' %}
+{% endif %}
 {% endblock topbar %}
 
 {% block search %}
