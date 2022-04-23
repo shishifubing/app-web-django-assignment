@@ -43,7 +43,7 @@
 
 ## D5.6
 
-Google авторизация включена только для localhost:6001
+`Google` авторизация включена только для `localhost:6001`
 
 `/accounts/login/`
 
