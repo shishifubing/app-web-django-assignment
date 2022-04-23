@@ -1,10 +1,10 @@
+from typing import Any
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from .forms import ArticleForm
 from .filters import ArticleFilter
 from .models import Article
-
-# Create your views here.
 
 
 class ArticleList(ListView):
@@ -52,21 +52,25 @@ class ArticleDetail(DetailView):
     context_object_name = 'article'
 
 
-class ArticleUpdateView(UpdateView):
-    template_name = 'articles/article_update.html'
+class ArticleUpdateView(PermissionRequiredMixin,
+                        UpdateView):
+    template_name = 'articles/forms/article_update.html'
+    model = Article
     form_class = ArticleForm
-
-    def get_object(self, **kwargs):
-        id = self.kwargs.get('pk')
-        return Article.objects.get(pk=id)
+    permission_required = ('newspaper.change_article',)
 
 
-class ArticleCreateView(CreateView):
-    template_name = 'articles/article_create.html'
+class ArticleCreateView(PermissionRequiredMixin,
+                        CreateView):
+    template_name = 'articles/forms/article_create.html'
     form_class = ArticleForm
+    permission_required = ('newspaper.add_article',)
 
 
-class ArticleDeleteView(DeleteView):
-    template_name = 'articles/article_delete.html'
+class ArticleDeleteView(PermissionRequiredMixin,
+                        DeleteView):
+    template_name = 'articles/forms/article_delete.html'
     queryset = Article.objects.all()
     success_url = '/news/search'
+
+    permission_required = ('newspaper.delete_article',)

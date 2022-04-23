@@ -15,10 +15,12 @@
         {% for article in object_list %}
         <tr>
             <td>
-                <a href="{% url 'article_update' article.id %}" class="btn btn-primary btn-circle btn-sm">
+                <a href="{% url 'article_update' article.id %}"
+                  class="btn btn-primary btn-circle btn-sm m-1">
                     <i class="fas fa-pencil-alt"></i>
                 </a>
-                <a href="{% url 'article_delete' article.id %}" class="btn btn-danger btn-circle btn-sm">
+                <a href="{% url 'article_delete' article.id %}"
+                   class="btn btn-danger btn-circle btn-sm m-1">
                     <i class="fas fa-trash"></i>
                 </a>
             </td>
