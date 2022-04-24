@@ -1,5 +1,5 @@
 from django_filters import FilterSet, DateTimeFilter, CharFilter
-from .models import Article
+from .models import Post
 from .widgets import BootstrapDatePickerInput, BootstrapTextInput
 
 
@@ -19,5 +19,5 @@ class ArticleFilter(FilterSet):
         widget=BootstrapTextInput(_placeholder='author name'))
 
     class Meta:
-        model = Article
+        model = Post
         fields = ['publication_date', 'name', 'author_name']

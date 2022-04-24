@@ -26,7 +26,7 @@ class BootstrapTextInput(TextInput):
     def get_context(self, name, value, attrs):
         text_input_id = f'text_input_{name}'
         if attrs is None:
-            attrs = dict()
+            attrs = {}
         attrs['data-target'] = f'#{text_input_id}'
         attrs['class'] = 'form-control input-group'
         attrs['placeholder'] = self._placeholder

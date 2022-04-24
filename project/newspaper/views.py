@@ -1,14 +1,14 @@
 from typing import Any
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
-from .forms import ArticleForm
+from .forms import ArticleForm, ViewMixin
 from .filters import ArticleFilter
-from .models import Article
+from .models import Post
 
 
 class ArticleList(ListView):
-    model = Article
+    model = Post
     template_name = 'articles/articles.html'
     context_object_name = 'articles'
     ordering = ['-publication_date']
@@ -19,8 +19,8 @@ class ArticleList(ListView):
 
 class ArticleListSearch(ListView):
 
-    model = Article
-    template_name = 'articles/articles_search.html'
+    model = Post
+    template_name = 'articles/search.html'
     context_object_name = 'articles'
     ordering = ['-publication_date']
     paginate_by = 5
@@ -47,30 +47,27 @@ class ArticleListSearch(ListView):
 
 
 class ArticleDetail(DetailView):
-    model = Article
+    model = Post
     template_name = 'articles/article.html'
     context_object_name = 'article'
 
 
-class ArticleUpdateView(PermissionRequiredMixin,
-                        UpdateView):
-    template_name = 'articles/forms/article_update.html'
-    model = Article
+class ArticleUpdateView(PermissionRequiredMixin, UpdateView):
+    template_name = 'articles/forms/update.html'
+    model = Post
     form_class = ArticleForm
     permission_required = ('newspaper.change_article',)
 
 
-class ArticleCreateView(PermissionRequiredMixin,
-                        CreateView):
-    template_name = 'articles/forms/article_create.html'
+class ArticleCreateView(PermissionRequiredMixin, ViewMixin, CreateView):
+    template_name = 'articles/forms/create.html'
     form_class = ArticleForm
     permission_required = ('newspaper.add_article',)
 
 
-class ArticleDeleteView(PermissionRequiredMixin,
-                        DeleteView):
-    template_name = 'articles/forms/article_delete.html'
-    queryset = Article.objects.all()
+class ArticleDeleteView(PermissionRequiredMixin, DeleteView):
+    template_name = 'articles/forms/delete.html'
+    queryset = Post.objects.all()
     success_url = '/news/search'
 
     permission_required = ('newspaper.delete_article',)
