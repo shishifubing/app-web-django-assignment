@@ -36,6 +36,11 @@ ACCOUNT_FORMS = {
     #signup: allauth.socialaccount.forms.SignupForm
 }
 
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'project-python-django'
+EMAIL_HOST_PASSWORD = 'wnybtxhueqmgebte'
+EMAIL_USE_SSL = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
