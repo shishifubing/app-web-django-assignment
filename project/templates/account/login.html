@@ -11,16 +11,21 @@ Login
         <div class="text-center">
             <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
         </div>
-        {% include 'account/login_form.html'%}
+
+        <form class="user" method="post" action="{% url 'account_login' %}">
+            {% include 'form/form.html' %}
+            <input type="submit" class="btn btn-primary btn-user btn-block"
+                   value="Login" />
+            <hr>
+            {% include 'socialaccount/snippets/provider_list.html' with process='login' provider_message='Login with ' %}
+            </form>
         <hr>
-        <!--
         <div class="text-center">
             <a class="small"
                href="{% url 'account_reset_password' %}">
                Forgot Password?
             </a>
         </div>
-        -->
         <div class="text-center">
             <a class="small"
                href="{% url 'account_signup' %}">
