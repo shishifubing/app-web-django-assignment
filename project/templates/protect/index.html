@@ -13,6 +13,7 @@ Protected content
 </div>
 <div class="col-lg-6 p-5">
     <h2>{% user_display user %}</h2>
+    <p> Email: {{ user.email }}</p>
     <div class="py-5">
         {% if is_author %}
         <p class="btn btn-success btn-user col-md-auto">

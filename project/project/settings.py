@@ -23,7 +23,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_FORMS = {
     #add_email: allauth.account.forms.AddEmailForm
     # change_password: allauth.account.forms.#ChangePasswordForm
@@ -33,7 +33,6 @@ ACCOUNT_FORMS = {
     #reset_password_from_key: allauth.account.forms.ResetPasswordKeyForm
     #set_password: allauth.account.forms.SetPasswordForm
     'signup': 'sign.forms.CustomSignupForm'
-    #signup: allauth.socialaccount.forms.SignupForm
 }
 
 EMAIL_HOST = 'smtp.yandex.ru'
@@ -41,6 +40,7 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'project-python-django'
 EMAIL_HOST_PASSWORD = 'wnybtxhueqmgebte'
 EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = f'{EMAIL_HOST_USER}@yandex.ru'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -129,6 +129,13 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

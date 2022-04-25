@@ -1,17 +1,14 @@
 {% extends 'default.html' %}
 
 {% block title %}
+{% if view.kwargs.category %}
+{{ view.kwargs.category | capfirst }} articles
+{% else %}
 Articles
+{% endif %}
 {% endblock title %}
 
 {% block content %}
-<h1 class="my-2">
-    Articles
-    <a href="{% url 'article_create' %}" class="btn btn-success btn-circle">
-        <i class="fas fa-plus"></i>
-    </a>
-</h1>
-
+{% include 'articles/header.html' %}
 {% include 'articles/articles_table.html' %}
-
 {% endblock content %}

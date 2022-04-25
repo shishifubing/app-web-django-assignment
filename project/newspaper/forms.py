@@ -2,6 +2,7 @@ from typing import Any
 from .models import Post, Author
 from django.forms import ModelForm, Form, DateField
 from .widgets import XDSoftDatePickerInput
+from django_filters import FilterSet
 
 
 class FormMixin:
@@ -9,9 +10,13 @@ class FormMixin:
         """
         add extra attributes to all widgets
         """
-        self.request = kwargs.pop('request', None)
+        self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
-        for field in self.fields.values():
+        if isinstance(self, FilterSet):
+            fields = self.form.fields
+        else:
+            fields = self.fields
+        for field in fields.values():
             _class = field.widget.attrs.get('class', '')
             extra = ' form-control'
             if hasattr(field.widget,
@@ -29,7 +34,7 @@ class ViewMixin:
         """
 
         kwargs = super().get_form_kwargs()
-        kwargs['request'] = self.request
+        kwargs['user'] = self.request.user
         return kwargs
 
 
@@ -39,8 +44,11 @@ class ArticleForm(FormMixin, ModelForm):
         model = Post
         fields = ('name', 'description', 'type', 'category')
 
+
+class ArticleFormAddAuthor(ArticleForm):
+
     def save(self, commit=True):
-        author = Author.objects.get_or_create(user=self.request.user)[0]
+        author = Author.objects.get_or_create(user=self.user)[0]
         self.instance.author = author
         return super().save(commit)
 

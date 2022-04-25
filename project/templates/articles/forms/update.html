@@ -1,18 +1,16 @@
-{% extends 'default.html' %}
+{% extends 'account/default.html' %}
 
 {% block title %}
-Update
+Create
 {% endblock title %}
 
-{% block content %}
-<form method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <button class="btn btn-primary btn-icon-split my-2" type="submit">
+{% block sign_content %}
+<form method="post" class="user p-5">
+    {% include 'form/form.html' %}
+    <button class="btn btn-success btn-icon-split my-2" type="submit">
         <span class="icon text-white-50">
-            <i class="fas fa-pencil-alt"></i>
+            <i class="fas fa-check"></i>
         </span>
-        <span class="text">Confirm</span>
-    </a>
+        <span class="text">Update</span>
 </form>
-{% endblock content %}
+{% endblock sign_content %}

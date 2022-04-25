@@ -1,6 +1,7 @@
+from typing import Any
 from django.db.models import Model, CharField, TextField, DateTimeField, ManyToManyField, OneToOneField, ForeignKey, IntegerField, CASCADE
 from django.contrib.auth.models import User
-
+from django.core.mail import send_mail
 # Create your models here.
 
 
@@ -26,8 +27,10 @@ class Author(Model):
 
 class Category(Model):
     name = CharField(max_length=50, unique=True)
+    subscribers = ManyToManyField(User)
 
     def __str__(self) -> str: return self.name.title()
+    def add_user(self, user) -> None: self.subscribers.add(user)
 
 
 class Post(Model):
@@ -55,7 +58,7 @@ class Post(Model):
 
     def dislike(self) -> None:
         self.rating -= 1
-        self.save
+        self.save()
 
 
 class PostCategory(Model):
