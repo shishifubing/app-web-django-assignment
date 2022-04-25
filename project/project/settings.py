@@ -42,6 +42,9 @@ EMAIL_HOST_PASSWORD = 'wnybtxhueqmgebte'
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = f'{EMAIL_HOST_USER}@yandex.ru'
 
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -73,6 +76,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    'django_apscheduler',
 
     'simpleapp.apps.SimpleappConfig',
     'newspaper.apps.NewspaperConfig',
