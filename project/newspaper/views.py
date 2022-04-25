@@ -1,10 +1,11 @@
-from typing import Any
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView, View
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 
-from .forms import ArticleForm, ViewMixin
+from .forms import ArticleForm, ArticleFormAddAuthor, ViewMixin
 from .filters import ArticleFilter
-from .models import Post
+from .models import Category, Post
 
 
 class ArticleList(ListView):
@@ -13,6 +14,34 @@ class ArticleList(ListView):
     context_object_name = 'articles'
     ordering = ['-publication_date']
     paginate_by = 10
+
+
+class ArticleListType(ArticleList):
+
+    def get_queryset(self):
+        return self.model.objects.filter(type=self.kwargs.get('type'))
+
+
+class ArticleListCategory(ArticleList):
+
+    def get_queryset(self):
+        category = Category.objects.get(name=self.kwargs.get('category'))
+        return self.model.objects.filter(category=category)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category = Category.objects.get(name=self.kwargs.get('category'))
+        subscribers = category.subscribers.all()
+        context['is_subscribed'] = self.request.user in subscribers
+        return context
+
+
+@login_required
+def category_subscribe(request, category: str):
+    category = Category.objects.get(name=category)
+    category.subscribers.add(request.user)
+    return redirect('/')
+
 
 # https://cheat.readthedocs.io/en/latest/django/filter.html
 
@@ -25,7 +54,6 @@ class ArticleListSearch(ListView):
     ordering = ['-publication_date']
     paginate_by = 5
     filterset_class = ArticleFilter
-    form_class = ArticleForm
 
     def get_queryset(self):
         # Get the queryset however you usually would.  For example:
@@ -42,7 +70,6 @@ class ArticleListSearch(ListView):
         context = super().get_context_data(**kwargs)
         # Pass the filterset to the template - it provides the form.
         context['filter'] = self.filterset
-        context['form'] = self.form_class()
         return context
 
 
@@ -61,7 +88,7 @@ class ArticleUpdateView(PermissionRequiredMixin, UpdateView):
 
 class ArticleCreateView(PermissionRequiredMixin, ViewMixin, CreateView):
     template_name = 'articles/forms/create.html'
-    form_class = ArticleForm
+    form_class = ArticleFormAddAuthor
     permission_required = ('newspaper.add_article',)
 
 

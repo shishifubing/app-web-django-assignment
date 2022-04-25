@@ -1,23 +1,16 @@
-from django_filters import FilterSet, DateTimeFilter, CharFilter
+from django_filters import FilterSet, DateTimeFilter
 from .models import Post
-from .widgets import BootstrapDatePickerInput, BootstrapTextInput
+from .widgets import BootstrapDatePickerInput
+from .forms import FormMixin
 
 
-class ArticleFilter(FilterSet):
+class ArticleFilter(FormMixin, FilterSet):
 
     # settings.py: DATETIME_INPUT_FORMATS
     publication_date = DateTimeFilter(
-        lookup_expr='gte', label='',
+        lookup_expr='gte', label='Publication date',
         widget=BootstrapDatePickerInput(format='%Y-%m-%D'))
-    name = CharFilter(
-        lookup_expr='icontains',
-        label='',
-        widget=BootstrapTextInput(_placeholder='article name'))
-    author_name = CharFilter(
-        lookup_expr='icontains',
-        label='',
-        widget=BootstrapTextInput(_placeholder='author name'))
 
     class Meta:
         model = Post
-        fields = ['publication_date', 'name', 'author_name']
+        fields = ['publication_date', 'name', 'author', 'type', 'category']
