@@ -25,13 +25,13 @@ ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_FORMS = {
-    #add_email: allauth.account.forms.AddEmailForm
+    # add_email: allauth.account.forms.AddEmailForm
     # change_password: allauth.account.forms.#ChangePasswordForm
-    #disconnect: allauth.socialaccount.forms.DisconnectForm
+    # disconnect: allauth.socialaccount.forms.DisconnectForm
     'login': 'sign.forms.CustomLoginForm',
-    #reset_password: allauth.account.forms.ResetPasswordForm
-    #reset_password_from_key: allauth.account.forms.ResetPasswordKeyForm
-    #set_password: allauth.account.forms.SetPasswordForm
+    # reset_password: allauth.account.forms.ResetPasswordForm
+    # reset_password_from_key: allauth.account.forms.ResetPasswordKeyForm
+    # set_password: allauth.account.forms.SetPasswordForm
     'signup': 'sign.forms.CustomSignupForm'
 }
 
@@ -44,6 +44,55 @@ DEFAULT_FROM_EMAIL = f'{EMAIL_HOST_USER}@yandex.ru'
 
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, '.django-cache'),
+    }
+}
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
+            'format': '{asctime} {levelname} {message}'
+        },
+        'verbose': {
+            'format': ' '.join('%(levelname)s', '%(asctime)s', '%(module)s',
+                               '%(process)d', '%(thread)d', '%(message)s')
+        }
+    },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'DEBUG'
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        }
+    }
+}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/

@@ -1,9 +1,12 @@
 {% extends 'layout/default.html' %}
 {% load account %}
+{% load cache %}
 
+{% cache 600 sidebar %}
 {% block sidebar %}
 {% include 'layout/sidebar.html' %}
 {% endblock sidebar %}
+{% endcache %}
 
 {% block topbar %}
 {% user_display user as user_display %}
