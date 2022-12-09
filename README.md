@@ -2,10 +2,9 @@
 
 SSR django app
 
-# basic overview
+# overview
 
 ![Alt text](./doc/app-web-django-assignment-overview.svg)
-<img src="./doc/app-web-django-assignment-overview.svg">
 Made with https://googlecloudcheatsheet.withgoogle.com/architecture
 
 # modules
