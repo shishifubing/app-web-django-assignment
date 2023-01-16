@@ -1,10 +1,13 @@
 # [`app-web-django-assignment`][repo]
 
+<!-- shields -->
+[![shield-finished]][repo]
+
 <!-- internal links -->
 
 <!-- external links -->
 [repo]: https://github.com/shishifubing-com/app-web-django-assignment
-
+[shield-finished]: https://img.shields.io/badge/status-finished-informational?style=for-the-badge
 
 ## `D1.5`
 
