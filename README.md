@@ -1,4 +1,10 @@
-# modules
+# [`app-web-django-assignment`][repo]
+
+<!-- internal links -->
+
+<!-- external links -->
+[repo]: https://github.com/shishifubing-com/app-web-django-assignment
+
 
 ## `D1.5`
 
