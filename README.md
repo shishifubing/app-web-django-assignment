@@ -7,7 +7,7 @@
 
 <!-- description -->
 
-SSR web app I built for a fullstack web developer course
+SSR web app I built for a Fullstack Python Web Developer course
 
 Task list can be found in [doc]
 
