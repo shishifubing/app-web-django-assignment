@@ -1,13 +1,13 @@
-# [`app-web-django-assignment`][repo-url]
+<div align="center" markdown="1">
 
-<!-- shields -->
+# [`app-web-django-assignment`][url-repo]
 
-[![AGPLv3.0 License][license-shield]][license-url]
-[![Status][status-finished-shield]][repo-url]
-
-<!-- description -->
+[![License][shield-license]][url-license]
+[![Status][shield-status-finished]][url-repo]
 
 SSR web app I built for a Fullstack Python Web Developer course
+
+</div>
 
 Task list can be found in [doc]
 
@@ -17,12 +17,12 @@ Task list can be found in [doc]
 
 <!-- project links -->
 
-[repo-url]: https://github.com/shishifubing/app-web-django-assignment
-[license-url]: https://github.com/shishifubing/app-web-django-assignment/blob/main/LICENSE
+[url-repo]: https://github.com/shishifubing/app-web-django-assignment
+[url-license]: https://github.com/shishifubing/app-web-django-assignment/blob/main/LICENSE
 
 <!-- external links -->
 
 <!-- shield links -->
 
-[status-finished-shield]: https://img.shields.io/badge/status-finished-informational?style=for-the-badge
-[license-shield]: https://img.shields.io/github/license/shishifubing/app-web-django-assignment.svg?style=for-the-badge
+[shield-status-finished]: https://img.shields.io/badge/status-finished-informational?style=for-the-badge
+[shield-license]: https://img.shields.io/github/license/shishifubing/app-web-django-assignment.svg?style=for-the-badge
