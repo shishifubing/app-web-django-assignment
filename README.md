@@ -5,11 +5,17 @@
 [![License][shield-license]][url-license]
 [![Status][shield-status-finished]][url-repo]
 
-SSR web app I built for a Fullstack Python Web Developer course
+SSR web app I built for a course
 
 </div>
 
 Task list can be found in [doc]
+
+## Features
+
+- Boring
+- Django, Python3 
+- Bootstrap, Javascript, CSS, HTML 
 
 <!-- relative links -->
 
