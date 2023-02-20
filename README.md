@@ -9,9 +9,11 @@ SSR web app I built for a course
 
 </div>
 
+## About The Project
+
 Task list can be found in [doc]
 
-## Features
+### Features
 
 - Boring
 - Django, Python3 
