@@ -14,7 +14,7 @@ SSR web app I built for a course
 
 ## About The Project
 
-Task list can be found in [doc]
+Task list can be found in [docs]
 
 ### Features
 
@@ -24,7 +24,7 @@ Task list can be found in [doc]
 
 <!-- relative links -->
 
-[doc]: doc/README.md
+[docs]: docs
 
 <!-- project links -->
 
