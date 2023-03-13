@@ -41,7 +41,7 @@ Task list can be found in [docs]
 
 [badge-status-finished]: https://img.shields.io/badge/status-finished-informational
 [badge-license]: https://img.shields.io/github/license/shishifubing/app-web-django-assignment.svg
-[badge-workflow-release]: https://img.shields.io/github/actions/workflow/status/shishifubing/app-web-django-assignment.svg/release.yml?branch=main&label=release&logo=github
+[badge-workflow-release]: https://img.shields.io/github/actions/workflow/status/shishifubing/app-web-django-assignment/release.yml?branch=main&label=release&logo=github
 [badge-version]: https://img.shields.io/github/v/release/shishifubing/app-web-django-assignment.svg?label=version
 
 <!-- other badge links -->
